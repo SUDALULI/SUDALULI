@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LULI 城市低空智能实验室 - 苏州大学</title>
+<style>
+        /* ==================== 全局与基础设置 ==================== */
+        :root {
+            --primary-blue: #2563eb; 
+            --tag-bg: #f3f6f9;       
+            --tag-text: #0a58ca;     
+            --highlight-red: #dc3545;
+            
+            --text-main: #333333;
+            --text-light: #555555;
+            --bg-body: #ffffff;
+            --bg-gray: #f8f9fa;
+            --border-color: #eaeaea;
+            --placeholder-bg: #e9ecef;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            color: var(--text-main); 
+            line-height: 1.7; 
+            background: var(--bg-body); 
+            scroll-behavior: smooth; 
+        }
+        a { text-decoration: none; color: var(--primary-blue); transition: 0.2s ease-in-out; }
+        a:hover { text-decoration: underline; }
+
+        /* ==================== 核心居中约束 ==================== */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        
+        /* 统一标题样式 - 强制居中 */
+        h2.section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            color: #222;
+            position: relative;
+        }
+        h2.section-title::after {
+            content: ''; display: block; width: 40px; height: 3px; 
+            background: var(--primary-blue); margin: 15px auto 0; border-radius: 2px;
+        }
+        
+        h3.sub-title { font-size: 22px; font-weight: 600; margin-bottom: 25px; color: #222; max-width: 900px; margin-left: auto; margin-right: auto; }
+
+        /* ==================== 导航栏 ==================== */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+        .nav-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            height: 65px; max-width: 1000px; margin: 0 auto; padding: 0 20px;
+        }
+        .logo { font-size: 22px; font-weight: 800; color: #222; letter-spacing: 0.5px; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #666; font-weight: 500; font-size: 15px; padding-bottom: 4px; }
+        .nav-links a:hover { color: #111; text-decoration: none; }
+        .nav-links a.active { border-bottom: 2px solid var(--primary-blue); color: #111; font-weight: 600; }
+
+        section[id] {
+            /* 导航栏高度65px + 一点余量，防止贴边 */
+            scroll-margin-top: 80px;
+        }
+
+
+        /* ==================== 首屏简介 ==================== */
+        /* ==================== 首屏简介 (带背景图与暗色笼罩) ==================== */
+        .hero { 
+            margin-top: 20px; /* 贴紧导航栏下方 */
+            padding: 100px 0 50px 0; /* 增加上下内边距，让背景图展示更广 */
+            text-align: center; 
+            position: relative;
+            /* 核心：线性渐变实现半透明黑色笼罩 (0.7代表透明度)，底层叠加图片 */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url('assets/UAV_2.jpg') no-repeat center center / cover;
+        }
+
+        /* 巨大的 LULI 隐形水印：调为透明白色 */
+        .hero::before {
+            content: 'LULI';
+            position: absolute; top: 35%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 180px; font-weight: 900;
+            color: rgba(255, 255, 255, 0.1); /* 透明白色 */
+            z-index: 1; pointer-events: none;
+        }
+
+        /* 保证容器内容在水印之上 */
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- 背景变暗，文字必须变成白色系 --- */
+        .hero h1 { font-size: 42px; font-weight: 800; color: #ffffff; margin-bottom: 8px; }
+        .hero h2 { font-size: 20px; font-weight: 600; color: #f8f9fa; margin-bottom: 8px; }
+        .hero h3 { font-size: 16px; font-weight: 400; color: #cccccc; margin-bottom: 40px; }
+
+        .hero-text-block {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: justify;
+            /* text-align-last: center;  */
+            font-size: 16px;
+            color: #e5e7eb; /* 极浅灰色正文 */
+            line-height: 1.8;
+        }
+        .hero-text-block p { margin-bottom: 20px; }
+
+        /* 招生文字颜色：改为偏亮的红色（珊瑚红），以免在黑背景上看不清 */
+        .text-red { color: #ff6b6b; font-weight: 600; }
+
+        /* 标签样式优化：改为毛玻璃半透明效果，完美融入背景图 */
+        .hero-tags { margin: 35px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .tag { 
+            background-color: rgba(255, 255, 255, 0.15); 
+            color: #ffffff; 
+            padding: 8px 22px; 
+            border-radius: 30px; 
+            font-size: 14px; 
+            font-weight: 500; 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px); /* 毛玻璃 */
+        }
+
+        /* 按钮组 */
+        .hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
+        .btn-blue { background-color: var(--primary-blue); color: #fff; padding: 10px 30px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3); transition: 0.2s; border: 1px solid var(--primary-blue);}
+        .btn-blue:hover { background-color: #1d4ed8; text-decoration: none; transform: translateY(-2px); }
+
+        /* 独立的透明线框按钮 (适用于 Github) */
+        .btn-outline { 
+            background-color: transparent; 
+            border: 1px solid #ffffff; 
+            color: #ffffff; 
+            box-shadow: none; 
+        }
+        .btn-outline:hover { 
+            background-color: rgba(255, 255, 255, 0.15); 
+        }
+        
+
+        .news-box { max-width: 1000px; margin: 60px auto 0; background: var(--bg-gray); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); text-align: left; }
+        /* .news-box h3 { text-align: center; margin-bottom: 20px; font-size: 18px; color: #222; } */
+        .news-box h3 { text-align: center; margin-bottom: 20px; font-size: 25px; font-weight: 700; color: #222; }
+        .news-list { list-style: none; }
+        /* .news-list li { margin-bottom: 12px; font-size: 14.5px; display: flex; justify-content: center; } */
+        .news-list li { margin-bottom: 12px; font-size: 14.5px; display: flex;}
+        .news-list .date { font-weight: bold; color: var(--primary-blue); width: 100px; flex-shrink: 0; text-align: right; margin-right: 15px; }
+
+        /* ==================== 团队人员 ==================== */
+        .people-wrapper { max-width: 800px; margin: 0 auto; } 
+        
+        .category-title { 
+            text-align: left; 
+            font-size: 20px; 
+            font-weight: 700; 
+            /* margin-top: 50px;  */
+            margin-bottom: 10px; 
+            color: #222; 
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 10px;
+        }
+        
+        .people-grid {
+            display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 20px;
+            justify-content: flex-start; 
+        }
+        .person-card { width: 135px; text-align: center; }
+        
+        .avatar { 
+            width: 125px; height: 125px; 
+            border-radius: 50%; object-fit: cover; 
+            margin: 0 auto 12px auto; 
+            border: 3px solid #eee; background-color: var(--placeholder-bg); display: block; 
+        }
+        
+        .person-name { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 2px; }
+        .person-desc { font-size: 12.5px; color: #666; line-height: 1.4; margin-bottom: 5px; }
+        .person-links a { font-size: 12px; margin: 0 5px; color: var(--primary-blue); font-weight: 500; }
+
+        /* ==================== 研究内容 ==================== */
+        .research-item { 
+            display: flex; justify-content: center; align-items: center; gap: 35px; 
+            max-width: 900px; margin: 0 auto 35px auto; 
+            background: #ffffff;
+            border: 1px solid #e5e7eb; 
+            border-radius: 12px;       
+            padding: 25px;             
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+        }
+        
+        .research-img { width: 170px; height: 105px; flex-shrink: 0; border-radius: 6px; object-fit: cover; border: 1px solid var(--border-color); background-color: var(--placeholder-bg); }
+        .placeholder-box { border: 2px dashed #ccc; box-shadow: none; }
+        
+        .research-content { flex: 1; text-align: justify; }
+        .research-content h4 { font-size: 19px; color: #111; margin-bottom: 12px; line-height: 1.4; text-align: left; }
+        .research-content p { font-size: 14.5px; color: var(--text-light); }
+
+        /* ==================== 论文发表 (全新卡片化仿照截图) ==================== */
+        .pub-list-container { max-width: 900px; margin: 0 auto; }
+        
+        .pub-item { 
+            display: flex; justify-content: flex-start; align-items: flex-start; gap: 30px; 
+            margin-bottom: 25px; 
+            background: #ffffff;
+            border: 1px solid #e5e7eb; /* 论文外框 */
+            border-radius: 10px;       /* 论文框圆角 */
+            padding: 25px;             /* 论文框内边距 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02); /* 轻微阴影 */
+            transition: box-shadow 0.3s ease;
+        }
+        .pub-item:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+        
+        .pub-img { 
+            width: 220px; height: 130px; object-fit: cover; flex-shrink: 0; 
+            border-radius: 6px; border: 1px solid var(--border-color); 
+            background-color: var(--placeholder-bg); 
+        }
+        
+        .pub-content { flex: 1; text-align: left; }
+        .pub-content h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #111; line-height: 1.4; }
+        .pub-content p.authors { font-size: 15px; color: #555;}
+        .pub-content p.authors b { color: #222; }
+        .pub-content p.journal { font-size: 14.5px; color: #555; font-style: italic;}
+        .pub-content p.journal b { font-style: normal; font-weight: 700; }
+        
+        /* 仿照截图的蓝色纯文本链接 */
+        .pub-links { margin-bottom: 2px; }
+        .pub-links a { 
+            font-size: 15px; font-weight: 600; color: var(--primary-blue); 
+            margin-right: 12px; text-decoration: none; 
+        }
+        .pub-links a:hover { text-decoration: underline; }
+        
+        /* 仿照截图的底部斜体灰色标签 */
+        .pub-tags { font-size: 14px; font-style: italic; color: #888; }
+
+        /* ==================== 招生与联系 ==================== */
+        .recruit-box { 
+            max-width: 850px; margin: 0 auto 20px; background: #fff; 
+            border-left: 4px solid var(--primary-blue); padding: 25px 30px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-radius: 4px; border: 1px solid var(--border-color); border-left-width: 4px;
+        }
+        .recruit-box h4 { font-size: 17.5px; margin-bottom: 8px; color: #222; }
+        .recruit-box p { font-size: 14.5px; color: var(--text-light); text-align: justify; }
+
+        .contact-box {
+            max-width: 850px; margin: 0 auto;
+            text-align: center; font-size: 15.5px; color: #444; line-height: 2;
+            background: var(--bg-gray); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color);
+        }
+
+        /* 页脚 */
+        footer { margin-top: 80px; padding: 40px 0; text-align: center; color: #777; font-size: 13px; background: var(--bg-gray); border-top: 1px solid var(--border-color); }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 15px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 32px; }
+            .news-list li { flex-direction: column; text-align: center; }
+            .news-list .date { text-align: center; margin: 0 auto 5px; width: auto; }
+            .research-item, .pub-item { flex-direction: column; text-align: center; padding: 20px; }
+            .research-content h4, .pub-content, .pub-content h4 { text-align: center; }
+            .research-img, .pub-img { width: 100%; height: auto; aspect-ratio: 16/9; margin: 0 auto; }
+            .people-grid { justify-content: center; }
+        }
+    
+        .nav-inner { gap: 18px; }
+        .nav-links { gap: 16px; }
+        .language-switch { display: flex; flex-shrink: 0; gap: 3px; padding: 3px; border: 1px solid var(--border-color); border-radius: 8px; }
+        .language-switch a { padding: 4px 9px; border-radius: 5px; color: var(--text-light); font-size: 13px; line-height: 1.5; white-space: nowrap; }
+        .language-switch a[aria-current="page"] { background: var(--primary-blue); color: white; }
+        .language-switch a:hover { text-decoration: none; background: var(--bg-gray); color: var(--primary-blue); }
+        .language-switch a:focus-visible { outline: 2px solid var(--primary-blue); outline-offset: 3px; }
+        @media (max-width: 950px) { .nav-links { gap: 10px; } .nav-links a { font-size: 13px; } .nav-inner { gap: 10px; } }
+        @media (max-width: 820px) { .nav-links { display: none; } }
+    </style>
+<link href="index.html" hreflang="en" rel="alternate"/><link href="zh.html" hreflang="zh-CN" rel="alternate"/></head>
+<body>
+<!-- 导航栏 -->
+<nav aria-label="主导航">
+<div class="nav-inner">
+<div class="logo">LULI</div>
+<div class="nav-links">
+<a class="active" href="#home">首页</a>
+<a href="#news">新闻动态</a>
+<a href="#people">团队成员</a>
+<a href="#research">研究方向</a>
+<a href="#publications">学术论文</a>
+<a href="#recruitment">招生招聘</a>
+<a href="#contact">联系我们</a>
+</div>
+<div aria-label="语言切换" class="language-switch" role="group"><a href="index.html" hreflang="en" lang="en">English</a><a aria-current="page" href="zh.html" hreflang="zh-CN" lang="zh-CN">中文</a></div></div>
+</nav>
+<!-- 首屏简介：只介绍实验室现状与研究内容，去除个人介绍 -->
+<!-- 注意：去掉了 section 上的 container，在里面新增了一个 <div class="container"> -->
+<section class="hero" id="home">
+<div class="container">
+<h1>LULI</h1>
+<h2>城市低空智能实验室</h2>
+<h3>苏州大学未来科学与工程学院</h3>
+<div class="hero-text-block">
+<!--                <p>LULI实验室坐落在美丽的江苏苏州吴江苏州大学未来校区内。本实验室致力于低空飞行器噪声计算评估、路径规划算法，以及人工智能与航空技术的前沿交叉研究，并高度关注物理世界中的多模态感知与具身智能导航应用。目前，实验室通过将物理驱动数据引擎、数值模拟、深度学习与视觉语言模型（VLM/LLM）等先进技术深度结合，以期在复杂的城市低空场景下，推动安静、可持续的低空经济发展，同时探索无人机和机器人在复杂未知环境中的自主决策与交互科学前沿问题。</p>-->
+<p>LULI 实验室位于江苏苏州的苏州大学未来校区，致力于人工智能与航空技术的前沿交叉研究，重点关注物理环境中的多模态感知与具身智能导航。实验室融合物理驱动的数据引擎、数值模拟、深度学习、视觉语言模型与大语言模型等技术，推动复杂城市低空场景中安静、可持续的低空交通发展，并探索无人机与机器人在复杂未知环境中自主决策与交互的基础科学问题。</p>
+<p class="text-red">实验室正在招收 2026/2027 年入学的硕士与博士研究生。欢迎勤奋踏实、热爱具身智能、无人机感知与机器人实际应用的同学加入 LULI，与我们共同成长！</p>
+</div>
+<div class="hero-tags">
+<span class="tag">路径规划</span>
+<span class="tag">噪声评估</span>
+<span class="tag">视觉语言导航</span>
+<span class="tag">具身智能</span>
+</div>
+<div class="hero-buttons">
+<a class="btn-blue" href="#recruitment">加入我们</a>
+<!-- 在暗色背景下，推荐给 Github 增加一个透明线框样式类 .btn-outline 会更好看 -->
+<!-- <a href="https://github.com/" target="_blank" class="btn-blue btn-outline">GitHub</a> -->
+<a class="btn-blue" href="" target="_blank">GitHub</a>
+</div>
+</div>
+</section>
+<section class="container" id="news">
+<div class="news-box">
+<h3>📰 新闻动态</h3>
+<ul class="news-list">
+<li><span class="date">2026/09</span> <span>欢迎 2026 级硕士研究生加入实验室！</span></li>
+<li><span class="date">2026/05</span> <span>团队在无人机视觉语言导航研究方面取得新进展，相关论文被ChinaMM录用。</span></li>
+<li><span class="date">2026/03</span> <span>团队关于低空无人机轨迹追踪的论文被ICME录用。</span></li>
+<li><span class="date">2025/09</span> <span>欢迎 2025 级硕士研究生加入实验室！</span></li>
+<li><span class="date">2025/06</span> <span>Qichen Tan 博士加入苏州大学，创立 LULI 研究团队。</span></li>
+</ul>
+</div>
+</section>
+<!-- 团队成员：整体居中框架，内部靠左对齐排列，头像调小 -->
+<section class="container" id="people">
+<h2 class="section-title">团队成员</h2>
+<div class="people-wrapper">
+<!-- PI -->
+<h3 class="category-title">教师与客座教师</h3>
+<div class="people-grid">
+<div class="person-card">
+<img alt="Qichen Tan" class="avatar" src="https://web.suda.edu.cn/_upload/article/images/b8/e2/6b27be784ba5acad5bed30954acf/e703eb88-dcf2-4948-bd43-911f9f895e77_s.png"/>
+<div class="person-name">Qichen Tan</div>
+<div class="person-desc">副教授</div>
+<div class="person-links"><a href="https://web.suda.edu.cn/tqc/" target="_blank">个人主页</a></div>
+</div>
+</div>
+<!-- 博士生 -->
+<h3 class="category-title">博士研究生</h3>
+<div class="people-grid">
+<div class="person-card"><img alt="Xin Liu" class="avatar" src="assets/liuxing.jpg"/><div class="person-name">Xin Liu</div><div class="person-desc">2023 年起<br/>具身智能</div></div>
+<div class="person-card"><img alt="Tao Li" class="avatar" src="assets/litao.jpg"/><div class="person-name">Tao Li</div><div class="person-desc">2024 年起<br/>具身智能</div></div>
+<div class="person-card"><img alt="Xu Han" class="avatar" src="assets/hanxu.jpg"/><div class="person-name">Xu Han</div><div class="person-desc">2025 年起<br/>具身智能</div></div>
+</div>
+<!-- 硕士生 -->
+<h3 class="category-title">硕士研究生</h3>
+<div class="people-grid">
+<div class="person-card"><img alt="Haosen Li" class="avatar" src="assets/Haosen-Li.jpg"/><div class="person-name">Haosen Li</div><div class="person-desc">2025 年起<br/>基于多模态的无人机轨迹追踪</div></div>
+<div class="person-card"><img alt="Yimin Tang" class="avatar" src="assets/Yimin-Tang.jpg"/><div class="person-name">Yimin Tang</div><div class="person-desc">2026 年起<br/>无人机视觉语言导航</div></div>
+<div class="person-card"><img alt="Jinxing Li" class="avatar" src="assets/Jinxing-Li.jpg"/><div class="person-name">Jinxing Li</div><div class="person-desc">2026 年起<br/>具身智能</div></div>
+<div class="person-card"><img alt="Zhikun Li" class="avatar" src="assets/Zhikun-Li.jpg"/><div class="person-name">Zhikun Li</div><div class="person-desc">2026 年起<br/>无人机多模态感知</div></div>
+<div class="person-card"><img alt="Yi Lin" class="avatar" src="assets/Yi-Lin.jpg"/><div class="person-name">Yi Lin</div><div class="person-desc">2026 年起<br/>无人机计算机视觉与环境感知</div></div>
+</div>
+<!-- 本科生 -->
+<h3 class="category-title">本科生</h3>
+<div class="people-grid">
+<div class="person-card"><img alt="Ziyan Ding" class="avatar" src="assets/dzy.jpg"/><div class="person-name">Ziyan Ding</div><div class="person-desc">2023 年起<br/>基于大语言模型的无人机飞行规划</div></div>
+<div class="person-card"><img alt="Kaixu Chen" class="avatar" src="assets/ckx.jpg"/><div class="person-name">Kaixu Chen</div><div class="person-desc">2023 年起<br/>无人机多智能体飞行优化</div></div>
+</div>
+<!-- 毕业生 -->
+<h3 class="category-title">毕业生</h3>
+<div class="people-grid">
+<div class="person-card"><div class="person-name">Xin Liu</div><div class="person-desc">在中国科学技术大学攻读博士学位</div></div>
+</div>
+</div>
+</section>
+<!-- 研究方向：外围增加圆角方框边框设计 -->
+<section class="container" id="research">
+<h2 class="section-title">研究方向</h2>
+<div class="research-item">
+<img alt="低空飞行器虚拟飞行与噪声评估模拟器" class="research-img" src="assets/work1.png"/>
+<div class="research-content">
+<h4>低空飞行器虚拟飞行与噪声评估模拟器</h4>
+<p>融合实验测量、数值模拟、半经验物理模型方法，精确计算飞行器声源指向性的强度和特征频率，最终实现环境噪声的高度可视化与可听化。</p>
+</div>
+</div>
+<div class="research-item">
+<img alt="噪声驱动的飞行优化与可持续低空经济" class="research-img" src="assets/work2.png"/>
+<div class="research-content">
+<h4>噪声驱动的飞行优化与可持续低空经济</h4>
+<p>聚焦于单机/多无人机的路径规划与智能协同，解决低空应用场景中的复杂优化问题，包括城市垂直起降机场布局优化、无人机配送物流运筹问题。</p>
+</div>
+</div>
+<div class="research-item">
+<img alt="基于空间声学的无人机轨迹追踪" class="research-img placeholder-box" src="assets/work3.png"/>
+<div class="research-content">
+<h4>基于空间声学的无人机轨迹追踪</h4>
+<p>深入挖掘无人机旋翼噪声物理特性，结合先进信号处理与机器学习算法，实现对复杂背景噪音下无人机目标的高精度、非视距轨迹追踪。</p>
+</div>
+</div>
+<div class="research-item">
+<img alt="面向开放指令的无人机视觉语言导航" class="research-img placeholder-box" src="assets/work4.png"/>
+<div class="research-content">
+<h4>面向开放指令的无人机视觉语言导航</h4>
+<p>探索无人机与机器人在复杂未知三维环境中的智能感知、推理与交互能力。使无人机能够精准理解自然语言形式的开放指令并自主导航。</p>
+</div>
+</div>
+</section>
+<!-- 论文发表 (加方框，蓝色链接文字，底部斜体标签) -->
+<section class="container" id="publications">
+<h2 class="section-title">学术论文</h2>
+<div class="pub-list-container">
+<!-- Paper 1 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1270963824002049-gr001_lrg.jpg"/>
+<div class="pub-content">
+<h4>Enhancing sustainable urban air transportation: Low-noise UAS flight planning using noise assessment simulator</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Li, Y., Wu, H., Zhou, P., Lo, H. K., Zhong, S., &amp; Zhang, X.</p>-->
+<p class="journal">Aerospace Science and Technology · <b>2024</b></p>
+<div class="pub-links">
+<a href="https://www.sciencedirect.com/science/article/pii/S1270963824002049">[Paper]</a>
+</div>
+<p class="pub-tags">Urban Air Mobility; UAS Flight Planning; Noise Assessment Simulator</p>
+</div>
+</div>
+<!-- Paper 2 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="assets/work2.png"/>
+<div class="pub-content">
+<h4>Low-Noise flight path planning of drones based on a virtual flight noise simulator: A vehicle routing problem</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Zhong, S., Qu, R., Li, Y., Zhou, P., Lo, H. K., &amp; Zhang, X.</p>-->
+<p class="journal">IEEE Intelligent Transportation Systems Magazine · <b>2024</b></p>
+<div class="pub-links">
+<a href="https://ieeexplore.ieee.org/abstract/document/10540653">[Paper]</a>
+</div>
+<p class="pub-tags">Drone Path Planning; Vehicle Routing Problem; Virtual Flight Noise</p>
+</div>
+</div>
+<!-- Paper 3 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1361920924002633-gr1_lrg.jpg"/>
+<div class="pub-content">
+<h4>Exploring noise reduction strategies: Optimizing drone station placement for last-mile delivery</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Hou, J., Li, Y., Qu, R., Zhou, P., Zhong, S., &amp; Zhang, X.</p>-->
+<p class="journal">Transportation Research Part D: Transport and Environment · <b>2024</b></p>
+<div class="pub-links">
+<a href="https://www.sciencedirect.com/science/article/pii/S1361920924002633">[Paper]</a>
+</div>
+<p class="pub-tags">Last-mile Delivery; Station Placement; Noise Reduction Strategies</p>
+</div>
+</div>
+<!-- Paper 4 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1361920923000834-gr2_lrg.jpg"/>
+<div class="pub-content">
+<h4>Virtual flight simulation of delivery drone noise in the urban residential community</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Bian, H., Guo, J., Zhou, P., Lo, H. K., Zhong, S., &amp; Zhang, X.</p>-->
+<p class="journal">Transportation Research Part D: Transport and Environment · <b>2023</b></p>
+<div class="pub-links">
+<a href="https://www.sciencedirect.com/science/article/pii/S1361920923000834">[Paper]</a>
+</div>
+<p class="pub-tags">Delivery Drone; Urban Residential Community; Acoustic Simulation</p>
+</div>
+</div>
+<!-- Paper 5 -->
+<div class="pub-item">
+                <img class="pub-img placeholder-box" src="assets/work3.png" alt="Paper Image">
+                <div class="pub-content">
+                    <h4>Noise-Resistant 3D Drone Trajectory Estimation via Acoustic Mode Decomposition</h4>
+<!--                    <p class="authors"><b>Tan, Q.</b>, et al.</p>-->
+                    <p class="journal">IEEE International Conference on Multimedia & Expo (In Press) · <b>2026</b></p>
+                    <div class="pub-links">
+                        <a href="javascript:void(0);">[Paper]</a>
+                    </div>
+                    <p class="pub-tags">Spatial Acoustic Tracking; Anti-UAV</p>
+                </div>
+            </div>
+</div>
+<p style="text-align: center; margin-top: 30px; font-size: 15px;">➡️ <a href="https://scholar.google.com/citations?user=Doo7G5UAAAAJ&amp;hl=zh-CN&amp;oi=ao" target="_blank">在谷歌学术查看完整论文列表</a></p>
+</section>
+<!-- 招生部分 (Recruitment) -->
+<section class="container" id="recruitment">
+<h2 class="section-title">招生招聘</h2>
+<div class="recruit-box">
+<h4>🚀 硕士与博士研究生</h4>
+<p>欢迎拥有人工智能、计算机、数学与机械工程等相关背景，且对上述研究方向抱有高度热情的同学联系交流。团队与海内外名校合作紧密，优秀的同学可推荐至国内985高校及境外知名高校联培或读博深造；在就业方面，也可内推推荐至大厂或头部企业。</p>
+</div>
+<div class="recruit-box">
+<h4>💡 本科生实习</h4>
+<p>热烈欢迎对科研感兴趣的在读本科生提前加入实验室。重点关注：具身智能无人机/机器人感知、视觉语言导航、以及机器人操作技能等前沿方向。</p>
+</div>
+</section>
+<!-- 联系方式独立成一个单独的模块 (Contact) -->
+<section class="container" id="contact">
+<h2 class="section-title">联系我们</h2>
+<div class="contact-box">
+<p><strong>电子邮箱：</strong> <a href="mailto:qctan@suda.edu.cn">qctan@suda.edu.cn</a></p>
+<p><strong>地址：</strong> 苏州大学未来校区未来科创中心（江苏省苏州市吴江区久泳西路1号）</p>
+</div>
+</section>
+<!-- 页脚 -->
+<footer>
+<div class="container">
+<p>© 2026 LULI 研究团队 · 苏州大学</p>
+</div>
+</footer>
+<script>
+        // Keep the current section when switching languages.
+        document.querySelectorAll('.language-switch a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                link.hash = window.location.hash;
+            });
+        });
+    </script></body>
+</html>
