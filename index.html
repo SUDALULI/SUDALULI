@@ -178,6 +178,9 @@
             justify-content: flex-start; 
         }
         .person-card { width: 135px; text-align: center; }
+        .masters-cohorts { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 20px; }
+        .cohort-title { font-size: 17px; font-weight: 600; color: #555; text-align: left; margin-bottom: 20px; }
+        .master-cohort .people-grid { flex-direction: row; align-items: flex-start; margin-bottom: 0; }
         
         .avatar { 
             width: 125px; height: 125px; 
@@ -337,6 +340,7 @@
 <div class="news-box">
 <h3>📰 News</h3>
 <ul class="news-list">
+<li><span class="date">2026/11</span> <span>Congratulations to Haosen Li and Hao Sun on successfully completing their thesis proposal defenses!</span></li>
 <li><span class="date">2026/09</span> <span>Welcome 2026 master students to join our lab!</span></li>
 <li><span class="date">2026/05</span> <span>Our team makes new progress in UAV Vision-Language Navigation (VLN). The related paper is accepted by ChinaMM Conference.</span></li>
 <li><span class="date">2026/03</span> <span>Our paper on low-altitude UAV trajectory tracking is accepted by ICME conference.</span></li>
@@ -381,12 +385,23 @@
 </div>
 <!-- 硕士生 -->
 <h3 class="category-title">Master’s Students</h3>
+<div class="masters-cohorts">
+<div class="master-cohort">
+<h4 class="cohort-title">2025 Cohort</h4>
 <div class="people-grid">
 <div class="person-card"><img alt="Haosen Li" class="avatar" src="assets/Haosen-Li.jpg"/><div class="person-name">Haosen Li</div><div class="person-desc">2025-<br/>Multimodal-based Trajectory Tracking of UAV</div></div>
+<div class="person-card"><img alt="Hao Sun" class="avatar" src="assets/Hao Sun.jpg"/><div class="person-name">Hao Sun</div><div class="person-desc">2025–<br/>Acoustic Characterization<br/>&amp; Passive Localization of UAV</div></div>
+</div>
+</div>
+<div class="master-cohort">
+<h4 class="cohort-title">2026 Cohort</h4>
+<div class="people-grid">
 <div class="person-card"><img alt="Yimin Tang" class="avatar" src="assets/Yimin-Tang.jpg"/><div class="person-name">Yimin Tang</div><div class="person-desc">2026-<br/>Vision-Language-Navigation of UAV</div></div>
-<div class="person-card"><img alt="Jinxing Li" class="avatar" src="assets/Jinxing-Li.jpg"/><div class="person-name">Jinxing Li</div><div class="person-desc">2026-<br/>Embodied AI</div></div>
+<div class="person-card"><img alt="Jinxing Li" class="avatar" src="assets/Jinxing-Li.jpg"/><div class="person-name">Jinxing Li</div><div class="person-desc">2026-<br/>UAV Path Planning</div></div>
 <div class="person-card"><img alt="Zhikun Li" class="avatar" src="assets/Zhikun-Li.jpg"/><div class="person-name">Zhikun Li</div><div class="person-desc">2026-<br/>Multimodal perception of UAV</div></div>
 <div class="person-card"><img alt="Yi Lin" class="avatar" src="assets/Yi-Lin.jpg"/><div class="person-name">Yi Lin</div><div class="person-desc">2026-<br/>Computer Vision &amp; Environment Perception of UAV</div></div>
+</div>
+</div>
 </div>
 <!-- 本科生 -->
 <h3 class="category-title">Undergraduate Students</h3>
@@ -465,57 +480,17 @@
 <div class="pub-list-container">
 <!-- Paper 1 -->
 <div class="pub-item">
-<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1270963824002049-gr001_lrg.jpg"/>
+<img alt="Wind-informed UAV path planning illustration" class="pub-img placeholder-box" src="assets/Hierarchical Wind-Informed Path Planning for Efffcient and Safe UAV Navigation in Urban Wind Field.jpg"/>
 <div class="pub-content">
-<h4>Enhancing sustainable urban air transportation: Low-noise UAS flight planning using noise assessment simulator</h4>
-<!--<p class="authors"><b>Tan, Q.</b>, Li, Y., Wu, H., Zhou, P., Lo, H. K., Zhong, S., &amp; Zhang, X.</p>-->
-<p class="journal">Aerospace Science and Technology · <b>2024</b></p>
+<h4>Hierarchical Wind-Informed Path Planning for Efficient and Safe UAV Navigation in Urban Wind Field</h4>
+<p class="journal">IEEE Internet of Things Journal · <b>2026</b></p>
 <div class="pub-links">
-<a href="https://www.sciencedirect.com/science/article/pii/S1270963824002049">[Paper]</a>
+<a href="https://ieeexplore.ieee.org/abstract/document/11749563/authors#authors">[Paper]</a>
 </div>
-<p class="pub-tags">Urban Air Mobility; UAS Flight Planning; Noise Assessment Simulator</p>
+<p class="pub-tags">Unmanned Aerial Vehicles; Wind-Informed Path Planning; Heuristic Search</p>
 </div>
 </div>
 <!-- Paper 2 -->
-<div class="pub-item">
-<img alt="Paper illustration" class="pub-img placeholder-box" src="assets/work2.png"/>
-<div class="pub-content">
-<h4>Low-Noise flight path planning of drones based on a virtual flight noise simulator: A vehicle routing problem</h4>
-<!--<p class="authors"><b>Tan, Q.</b>, Zhong, S., Qu, R., Li, Y., Zhou, P., Lo, H. K., &amp; Zhang, X.</p>-->
-<p class="journal">IEEE Intelligent Transportation Systems Magazine · <b>2024</b></p>
-<div class="pub-links">
-<a href="https://ieeexplore.ieee.org/abstract/document/10540653">[Paper]</a>
-</div>
-<p class="pub-tags">Drone Path Planning; Vehicle Routing Problem; Virtual Flight Noise</p>
-</div>
-</div>
-<!-- Paper 3 -->
-<div class="pub-item">
-<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1361920924002633-gr1_lrg.jpg"/>
-<div class="pub-content">
-<h4>Exploring noise reduction strategies: Optimizing drone station placement for last-mile delivery</h4>
-<!--<p class="authors"><b>Tan, Q.</b>, Hou, J., Li, Y., Qu, R., Zhou, P., Zhong, S., &amp; Zhang, X.</p>-->
-<p class="journal">Transportation Research Part D: Transport and Environment · <b>2024</b></p>
-<div class="pub-links">
-<a href="https://www.sciencedirect.com/science/article/pii/S1361920924002633">[Paper]</a>
-</div>
-<p class="pub-tags">Last-mile Delivery; Station Placement; Noise Reduction Strategies</p>
-</div>
-</div>
-<!-- Paper 4 -->
-<div class="pub-item">
-<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1361920923000834-gr2_lrg.jpg"/>
-<div class="pub-content">
-<h4>Virtual flight simulation of delivery drone noise in the urban residential community</h4>
-<!--<p class="authors"><b>Tan, Q.</b>, Bian, H., Guo, J., Zhou, P., Lo, H. K., Zhong, S., &amp; Zhang, X.</p>-->
-<p class="journal">Transportation Research Part D: Transport and Environment · <b>2023</b></p>
-<div class="pub-links">
-<a href="https://www.sciencedirect.com/science/article/pii/S1361920923000834">[Paper]</a>
-</div>
-<p class="pub-tags">Delivery Drone; Urban Residential Community; Acoustic Simulation</p>
-</div>
-</div>
-<!-- Paper 5 -->
 <div class="pub-item">
                 <img class="pub-img placeholder-box" src="assets/work3.png" alt="Paper Image">
                 <div class="pub-content">
@@ -528,6 +503,58 @@
                     <p class="pub-tags">Spatial Acoustic Tracking; Anti-UAV</p>
                 </div>
             </div>
+<!-- Paper 3 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1270963824002049-gr001_lrg.jpg"/>
+<div class="pub-content">
+<h4>Enhancing sustainable urban air transportation: Low-noise UAS flight planning using noise assessment simulator</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Li, Y., Wu, H., Zhou, P., Lo, H. K., Zhong, S., &amp; Zhang, X.</p>-->
+<p class="journal">Aerospace Science and Technology · <b>2024</b></p>
+<div class="pub-links">
+<a href="https://www.sciencedirect.com/science/article/pii/S1270963824002049">[Paper]</a>
+</div>
+<p class="pub-tags">Urban Air Mobility; UAS Flight Planning; Noise Assessment Simulator</p>
+</div>
+</div>
+<!-- Paper 4 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="assets/work2.png"/>
+<div class="pub-content">
+<h4>Low-Noise flight path planning of drones based on a virtual flight noise simulator: A vehicle routing problem</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Zhong, S., Qu, R., Li, Y., Zhou, P., Lo, H. K., &amp; Zhang, X.</p>-->
+<p class="journal">IEEE Intelligent Transportation Systems Magazine · <b>2024</b></p>
+<div class="pub-links">
+<a href="https://ieeexplore.ieee.org/abstract/document/10540653">[Paper]</a>
+</div>
+<p class="pub-tags">Drone Path Planning; Vehicle Routing Problem; Virtual Flight Noise</p>
+</div>
+</div>
+<!-- Paper 5 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1361920924002633-gr1_lrg.jpg"/>
+<div class="pub-content">
+<h4>Exploring noise reduction strategies: Optimizing drone station placement for last-mile delivery</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Hou, J., Li, Y., Qu, R., Zhou, P., Zhong, S., &amp; Zhang, X.</p>-->
+<p class="journal">Transportation Research Part D: Transport and Environment · <b>2024</b></p>
+<div class="pub-links">
+<a href="https://www.sciencedirect.com/science/article/pii/S1361920924002633">[Paper]</a>
+</div>
+<p class="pub-tags">Last-mile Delivery; Station Placement; Noise Reduction Strategies</p>
+</div>
+</div>
+<!-- Paper 6 -->
+<div class="pub-item">
+<img alt="Paper illustration" class="pub-img placeholder-box" src="https://ars.els-cdn.com/content/image/1-s2.0-S1361920923000834-gr2_lrg.jpg"/>
+<div class="pub-content">
+<h4>Virtual flight simulation of delivery drone noise in the urban residential community</h4>
+<!--<p class="authors"><b>Tan, Q.</b>, Bian, H., Guo, J., Zhou, P., Lo, H. K., Zhong, S., &amp; Zhang, X.</p>-->
+<p class="journal">Transportation Research Part D: Transport and Environment · <b>2023</b></p>
+<div class="pub-links">
+<a href="https://www.sciencedirect.com/science/article/pii/S1361920923000834">[Paper]</a>
+</div>
+<p class="pub-tags">Delivery Drone; Urban Residential Community; Acoustic Simulation</p>
+</div>
+</div>
 </div>
 <p style="text-align: center; margin-top: 30px; font-size: 15px;">➡️ <a href="https://scholar.google.com/citations?user=Doo7G5UAAAAJ&amp;hl=en&amp;oi=ao" target="_blank">View Full Publication List on Google Scholar</a></p>
 </section>
