@@ -178,9 +178,9 @@
             justify-content: flex-start; 
         }
         .person-card { width: 135px; text-align: center; }
-        .masters-cohorts { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 20px; }
+        .masters-cohorts, .undergraduate-teams { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 20px; }
         .cohort-title { font-size: 17px; font-weight: 600; color: #555; text-align: left; margin-bottom: 20px; }
-        .master-cohort .people-grid { flex-direction: row; align-items: flex-start; margin-bottom: 0; }
+        .master-cohort .people-grid, .undergraduate-team .people-grid { flex-direction: row; align-items: flex-start; margin-bottom: 0; }
         
         .avatar { 
             width: 125px; height: 125px; 
@@ -279,6 +279,7 @@
             .research-content h4, .pub-content, .pub-content h4 { text-align: center; }
             .research-img, .pub-img { width: 100%; height: auto; aspect-ratio: 16/9; margin: 0 auto; }
             .people-grid { justify-content: center; }
+            .undergraduate-team .cohort-title { text-align: center; }
         }
     
         .nav-inner { gap: 18px; }
@@ -403,10 +404,23 @@
 </div>
 </div>
 <!-- 本科生 -->
-<h3 class="category-title">本科生</h3>
+<h3 class="category-title" id="undergraduates">本科生</h3>
+<div class="undergraduate-teams">
+<div class="undergraduate-team">
+<h4 class="cohort-title">本科生创新小队</h4>
 <div class="people-grid">
 <div class="person-card"><img alt="Ziyan Ding" class="avatar" src="assets/dzy.jpg"/><div class="person-name">Ziyan Ding</div><div class="person-desc">2023 年起<br/>基于大语言模型的无人机飞行规划</div></div>
 <div class="person-card"><img alt="Kaixu Chen" class="avatar" src="assets/ckx.jpg"/><div class="person-name">Kaixu Chen</div><div class="person-desc">2023 年起<br/>无人机多智能体飞行优化</div></div>
+</div>
+</div>
+<div class="undergraduate-team">
+<h4 class="cohort-title">本科生创业小队</h4>
+<div class="people-grid">
+<div class="person-card"><img alt="Zihang Liu" class="avatar" src="assets/liuzihang.jpg"/><div class="person-name">Zihang Liu</div><div class="person-desc">2025 年起<br/>项目统筹与财务分析</div></div>
+<div class="person-card"><img alt="Xiangyu Chen" class="avatar" src="assets/chenxiangyu.jpg"/><div class="person-name">Xiangyu Chen</div><div class="person-desc">2025 年起<br/>软件开发与商业规划</div></div>
+<div class="person-card"><img alt="Yue Ma" class="avatar" src="assets/mayue.png"/><div class="person-name">Yue Ma</div><div class="person-desc">2025 年起<br/>无人机空地协同与自主对接</div></div>
+</div>
+</div>
 </div>
 <!-- 毕业生 -->
 <h3 class="category-title">毕业生</h3>
